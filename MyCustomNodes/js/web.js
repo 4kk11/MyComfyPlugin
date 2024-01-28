@@ -2,10 +2,10 @@ import { app } from "../../scripts/app.js";
 import { api } from "../../scripts/api.js";
 
 app.registerExtension({
-    name: "MyComfyPlugin",
+    name: "MyCustomNodes",
 
     async setup() {
-        console.log("MyComfyPlugin setup")
+        console.log("MyCustomNodes setup")
     },
     async beforeRegisterNodeDef(nodeType, nodeData, app) {
         if (nodeData.name === "TextInput") {

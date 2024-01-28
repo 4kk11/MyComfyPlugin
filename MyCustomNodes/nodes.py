@@ -11,7 +11,7 @@ class TextInput:
                 }
     RETURN_TYPES = ("STRING",)
     FUNCTION = "run"
-    CATEGORY = "MyComfyPlugin"
+    CATEGORY = "MyCustomNodes"
 
     def run(self, text, seed = None):
         return (text,)
@@ -23,7 +23,7 @@ class TextOutput:
     OUTPUT_NODE = True
     RETURN_TYPES = ()
     FUNCTION  = "run"
-    CATEGORY = "MyComfyPlugin"
+    CATEGORY = "MyCustomNodes"
 
     def run(self, text):
         print(text)
