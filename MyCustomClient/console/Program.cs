@@ -27,7 +27,7 @@ namespace MyCustomClient
             // send message
             try
             {
-                await SendMessace(input);
+                await SendMessage(input);
             }
             catch (Exception e)
             {
@@ -35,7 +35,7 @@ namespace MyCustomClient
             }
         }
 
-        static async Task SendMessace(string message)
+        static async Task SendMessage(string message)
         {
             Console.WriteLine("Sending message: " + message);
             using (ClientWebSocket client = new ClientWebSocket())
