@@ -5,6 +5,10 @@ app.registerExtension({
     name: "MyCustomClient",
 
     async setup() {
+        api.addEventListener("run_workflow", ({detail}) => {
+            app.queuePrompt(0);
+        });
+
         api.addEventListener("update_text", ({detail}) => {
             console.log("update_text", detail);
             const nodes = app.graph.findNodesByType("TextInput");

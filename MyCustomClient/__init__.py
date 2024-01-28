@@ -14,4 +14,5 @@ async def update_text(request):
     text = data["text"]
     
     server.PromptServer.instance.send_sync("update_text", data)
+    server.PromptServer.instance.send_sync("run_workflow", {})
     return web.Response()
