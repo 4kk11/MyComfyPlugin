@@ -24,6 +24,9 @@ app.registerExtension({
                 }
                 return r;
             }
+
+            nodeType.prototype.color = LGraphCanvas.node_colors.green.color;
+            nodeType.prototype.bgcolor = LGraphCanvas.node_colors.green.bgcolor;
         }
     },
     async nodeCreated(node, app) {
