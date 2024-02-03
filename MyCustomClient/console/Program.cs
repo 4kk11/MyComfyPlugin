@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net.WebSockets;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Json;
 using Newtonsoft.Json;
@@ -13,7 +11,7 @@ namespace MyCustomClient
     {
         private static readonly string SERVER_ADDRESS = "127.0.0.1:8188";
         static async Task Main(string[] args)
-        {   
+        {
             // get input
             Console.WriteLine("Enter message: ");
             string? input = Console.ReadLine();
@@ -45,7 +43,7 @@ namespace MyCustomClient
 
                 // create rest client
                 RestClient restClient = new RestClient($"http://{SERVER_ADDRESS}");
-                
+
 
                 // create json
                 var dic = new Dictionary<string, string>
@@ -70,7 +68,7 @@ namespace MyCustomClient
 
                     bool isClose = false;
 
-                    switch(comfyReceiveObject?.Type)
+                    switch (comfyReceiveObject?.Type)
                     {
                         case "update_text":
                             Console.WriteLine("Received update_text: " + comfyReceiveObject.Data?["text"]);
@@ -83,7 +81,7 @@ namespace MyCustomClient
                         break;
                     }
                 }
-                
+
             }
         }
     }
