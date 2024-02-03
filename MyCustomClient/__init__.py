@@ -1,12 +1,10 @@
 import os
 import server
+from .nodes import NODE_CLASS_MAPPINGS, NODE_DISPLAY_NAME_MAPPINGS
 from aiohttp import web
 
 WEB_DIRECTORY = "./js"
-
-__all__ = ['WEB_DIRECTORY']
-
-client_id = "B9F75B5E163146F89C628CE56669C138"
+__all__ = ['NODE_CLASS_MAPPINGS', 'NODE_DISPLAY_NAME_MAPPINGS', 'WEB_DIRECTORY']
 
 @server.PromptServer.instance.routes.post('/my_custom_client/update_text')
 async def update_text(request):
