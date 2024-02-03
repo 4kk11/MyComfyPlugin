@@ -11,10 +11,9 @@ app.registerExtension({
                 for (const w of this.widgets) {
                     if (w.name === "seed") {
                         w.type = "converted-widget";
-                        if (w.linkedWidgets) {
-                            for (const lw of w.linkedWidgets) {
-                                lw.type = "converted-widget";
-                            }
+                        if (!w.linkedWidgets) continue;
+                        for (const lw of w.linkedWidgets) {
+                            lw.type = "converted-widget";
                         }
                     }
                 }
