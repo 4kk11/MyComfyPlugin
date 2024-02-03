@@ -1,5 +1,3 @@
-import nodes
-
 class TextInput:
     @classmethod
     def INPUT_TYPES(s):
