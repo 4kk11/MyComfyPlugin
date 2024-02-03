@@ -28,6 +28,10 @@ app.registerExtension({
             nodeType.prototype.color = LGraphCanvas.node_colors.green.color;
             nodeType.prototype.bgcolor = LGraphCanvas.node_colors.green.bgcolor;
         }
+        else if (nodeData.name === "TextOutput") {
+            nodeType.prototype.color = LGraphCanvas.node_colors.green.color;
+            nodeType.prototype.bgcolor = LGraphCanvas.node_colors.green.bgcolor;
+        }
     },
     async nodeCreated(node, app) {
 
