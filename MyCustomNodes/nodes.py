@@ -25,7 +25,7 @@ class TextOutput:
 
     def run(self, text):
         print(text)
-        return text
+        return ()
 
 NODE_CLASS_MAPPINGS = {
     "TextInput": TextInput,
