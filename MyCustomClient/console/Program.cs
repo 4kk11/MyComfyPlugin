@@ -17,9 +17,9 @@ namespace MyCustomClient
             // get input
             Console.WriteLine("Enter message: ");
             string? input = Console.ReadLine();
-            if (input == null)
+            if (input == null || input.Length == 0)
             {
-                Console.WriteLine("Input is null");
+                Console.WriteLine("Input is empty. Exiting...");
                 return;
             }
 
