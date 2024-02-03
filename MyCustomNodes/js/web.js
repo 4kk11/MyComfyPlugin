@@ -3,10 +3,6 @@ import { api } from "../../scripts/api.js";
 
 app.registerExtension({
     name: "MyCustomNodes",
-
-    async setup() {
-        console.log("MyCustomNodes setup")
-    },
     async beforeRegisterNodeDef(nodeType, nodeData, app) {
         if (nodeData.name === "TextInput") {
             const origOnNodeCreated = nodeType.prototype.onNodeCreated;
@@ -32,9 +28,5 @@ app.registerExtension({
             nodeType.prototype.color = LGraphCanvas.node_colors.green.color;
             nodeType.prototype.bgcolor = LGraphCanvas.node_colors.green.bgcolor;
         }
-    },
-    async nodeCreated(node, app) {
-
     }
-
 })
