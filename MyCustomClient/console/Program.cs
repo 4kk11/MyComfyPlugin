@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Net.WebSockets;
 using System.Text;
-using System.Text.Json;
 using Newtonsoft.Json;
 using RestSharp;
 
@@ -15,7 +14,7 @@ namespace MyCustomClient
             // get input
             Console.WriteLine("Enter message: ");
             string? input = Console.ReadLine();
-            if (input == null || input.Length == 0)
+            if (string.IsNullOrEmpty(input))
             {
                 Console.WriteLine("Input is empty. Exiting...");
                 return;
