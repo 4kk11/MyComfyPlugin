@@ -10,6 +10,7 @@ class TextSend:
     CATEGORY = "MyCustomClient"
 
     def run(self, text):
+        # テキストをクライアントに送信する（コンソールアプリの方で受け取る）
         server.PromptServer.instance.send_sync("send_text", {"text": text})
         return ()
 

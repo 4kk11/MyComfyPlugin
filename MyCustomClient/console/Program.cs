@@ -8,10 +8,12 @@ namespace MyCustomClient
 {
     class Program
     {
+        // サーバーアドレスを静的変数で定義
         private static readonly string SERVER_ADDRESS = "127.0.0.1:8188";
+
         static async Task Main(string[] args)
         {
-            // get input
+            // ユーザー入力を受け取る
             Console.WriteLine("Enter message: ");
             string? input = Console.ReadLine();
             if (string.IsNullOrEmpty(input))
@@ -20,7 +22,7 @@ namespace MyCustomClient
                 return;
             }
 
-            // send message
+            // メッセージ送信を試みる
             try
             {
                 await SendMessage(input);
@@ -31,42 +33,45 @@ namespace MyCustomClient
             }
         }
 
+        // サーバーにメッセージを送信するメソッド
         static async Task SendMessage(string message)
         {
+            // 送信するメッセージを表示
             Console.WriteLine("Sending message: " + message);
             using (ClientWebSocket client = new ClientWebSocket())
             {
-                // connect to websocket server
+                // WebSocketサーバーへ接続
                 Uri serverUri = new Uri($"ws://{SERVER_ADDRESS}/ws");
                 await client.ConnectAsync(serverUri, CancellationToken.None);
 
-                // create rest client
+                // RESTクライアントを作成
                 RestClient restClient = new RestClient($"http://{SERVER_ADDRESS}");
 
-
-                // create json
+                // 送信メッセージを格納
                 var dic = new Dictionary<string, string>
                 {
                     { "text", message }
                 };
 
-                // send message
+                // REST APIを通じてメッセージ送信
                 RestRequest restRequest = new RestRequest("/my_custom_client/update_text", Method.Post);
                 string jsonData = JsonConvert.SerializeObject(dic);
                 restRequest.AddParameter("application/json", jsonData, ParameterType.RequestBody);
                 await restClient.ExecuteAsync(restRequest);
 
+                // サーバーからの応答を待ち続ける
                 while (client.State == WebSocketState.Open)
                 {
                     var receiveBuffer = new byte[1024];
                     var result = await client.ReceiveAsync(new ArraySegment<byte>(receiveBuffer), CancellationToken.None);
 
-                    // Convet to json
+                    // 受信データをJSONに変換
                     var json = Encoding.UTF8.GetString(receiveBuffer, 0, result.Count);
                     var comfyReceiveObject = JsonConvert.DeserializeObject<ComfyReceivedObject>(json);
 
                     bool isClose = false;
 
+                    // 応答タイプによって処理を分岐
                     switch (comfyReceiveObject?.Type)
                     {
                         case "update_text":
@@ -75,16 +80,17 @@ namespace MyCustomClient
                             break;
                     }
 
+                    // 応答処理後に接続を閉じる
                     if (isClose)
                     {
                         break;
                     }
                 }
-
             }
         }
     }
 
+    // サーバーからの応答を格納するクラス
     public class ComfyReceivedObject
     {
         [JsonProperty("type")]
