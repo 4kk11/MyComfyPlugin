@@ -74,8 +74,8 @@ namespace MyCustomClient
                     // 応答タイプによって処理を分岐
                     switch (comfyReceiveObject?.Type)
                     {
-                        case "update_text":
-                            Console.WriteLine("Received update_text: " + comfyReceiveObject.Data?["text"]);
+                        case "send_text":
+                            Console.WriteLine("Received send_text: " + comfyReceiveObject.Data?["text"]);
                             isClose = true;
                             break;
                     }
